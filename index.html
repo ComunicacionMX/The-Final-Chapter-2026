@@ -188,6 +188,14 @@ header p.date { font-family: var(--display); font-size: 18px; letter-spacing: 0.
     if (img) { var s = img.getAttribute('src'); img.setAttribute('src', ''); requestAnimationFrame(function () { img.setAttribute('src', s); }); }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+  var names = ['ubicacion', 'looks', 'todomoda', 'isadora'];
+  function fromHash() {
+    var i = names.indexOf((location.hash || '').replace('#', '').toLowerCase());
+    if (i >= 0) go(i);
+  }
+  var baseGo = go;
+  go = function (i) { baseGo(i); if (names[i] && location.hash !== '#' + names[i]) { try { history.replaceState(null, '', '#' + names[i]); } catch (e) {} } };
+  window.addEventListener('hashchange', fromHash);
   prev.addEventListener('click', function () { go(cur - 1); });
   next.addEventListener('click', function () { go(cur + 1); });
   var x0 = null;
@@ -197,6 +205,7 @@ header p.date { font-family: var(--display); font-size: 18px; letter-spacing: 0.
     var dx = e.changedTouches[0].clientX - x0; x0 = null;
     if (Math.abs(dx) > 40) go(dx < 0 ? cur + 1 : cur - 1);
   });
+  fromHash();
   document.addEventListener('keydown', function (e) {
     if (!document.getElementById('lb').hidden) return;
     if (e.key === 'ArrowRight') go(cur + 1);
