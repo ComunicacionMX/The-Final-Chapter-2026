@@ -45,7 +45,17 @@ header p.date { font-family: var(--display); font-size: 18px; letter-spacing: 0.
 .page.before { transform: rotateY(-100deg); transform-origin: left center; opacity: 0; z-index: 2; pointer-events: none; visibility: hidden; transition: transform 0.7s cubic-bezier(.3,.7,.2,1), opacity 0.5s, visibility 0s 0.7s; }
 .page.after { transform: rotateY(0deg); opacity: 0; pointer-events: none; visibility: hidden; transition: transform 0.7s cubic-bezier(.3,.7,.2,1), opacity 0.5s, visibility 0s 0.7s; }
 .page:not(.current) { position: absolute; inset: 0 0 auto 0; }
-.zoom { display: block; cursor: zoom-in; }
+.zoom { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.lb { position: fixed; inset: 0; z-index: 50; background: rgba(5,5,6,0.96); display: flex; flex-direction: column; }
+.lb[hidden] { display: none !important; }
+.lb-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: max(10px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px)); }
+.lb-bar p { margin: 0; font-size: 11px; letter-spacing: 0.24em; color: var(--muted); }
+.lb-bar button { min-width: 44px; min-height: 44px; border: 1px solid var(--line); background: transparent; color: var(--ink); font: 500 11px var(--ui); letter-spacing: 0.24em; padding: 0 14px; cursor: pointer; }
+.lb-view { flex: 1; overflow: auto; -webkit-overflow-scrolling: touch; cursor: zoom-in; touch-action: pan-x pan-y pinch-zoom; }
+.lb-view.on { cursor: grab; }
+.lb-view.drag { cursor: grabbing; }
+.lb-view img { display: block; margin: auto; width: 100%; height: auto; max-width: none; user-select: none; -webkit-user-drag: none; }
+.lb-view.on img { width: 250%; }
 .hot { position: absolute; display: block; border-radius: 4px; outline-offset: 3px; }
 .hot:hover { background: rgba(255,255,255,0.06); }
 .hot:focus-visible { outline: 2px solid var(--silver); }
@@ -87,7 +97,7 @@ header p.date { font-family: var(--display); font-size: 18px; letter-spacing: 0.
       <a class="hot" style="left:4.2%;top:13%;width:52.6%;height:64.4%" href="https://www.google.com/maps/dir/Samara+Shops+Santa+Fe/19.3595234,-99.2719106" target="_blank" rel="noopener" aria-label="Abrir el mapa en Google Maps"></a>
     </figure>
     <figure class="page after">
-      <a href="p02.jpg" target="_blank" rel="noopener" class="zoom" aria-label="Ver la hoja en tamaño completo"><img src="p02.jpg" loading="lazy" alt="Página 02, Black and Silver, dress code: inspiración de looks en negro para ellas y ellos, con detalles plateados."></a>
+      <button type="button" class="zoom" data-src="p02.jpg" aria-label="Ampliar la hoja"><img src="p02.jpg" loading="lazy" alt="Página 02, Black and Silver, dress code: inspiración de looks en negro para ellas y ellos, con detalles plateados."></button>
       <div class="fx" aria-hidden="true">
       <span class="shine" style="left:51%;top:8.5%;width:14.5%;height:21.5%"></span>
       <span class="spark" style="left:20.5%;top:44%;width:1.6%;animation-delay:0.00s"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0 C13 8 16 11 24 12 C16 13 13 16 12 24 C11 16 8 13 0 12 C8 11 11 8 12 0 Z"/></svg></span>
@@ -101,7 +111,7 @@ header p.date { font-family: var(--display); font-size: 18px; letter-spacing: 0.
       </div>
     </figure>
     <figure class="page after">
-      <a href="p03.jpg" target="_blank" rel="noopener" class="zoom" aria-label="Ver la hoja en tamaño completo"><img src="p03.jpg" loading="lazy" alt="Página 03, Brilla en plateado: accesorios de Todomoda de las cápsulas Night Flowers y Noche."></a>
+      <button type="button" class="zoom" data-src="p03.jpg" aria-label="Ampliar la hoja"><img src="p03.jpg" loading="lazy" alt="Página 03, Brilla en plateado: accesorios de Todomoda de las cápsulas Night Flowers y Noche."></button>
       <div class="fx" aria-hidden="true">
       <span class="shine" style="left:33%;top:6%;width:34%;height:10%"></span>
       <span class="spark" style="left:8.5%;top:25%;width:1.4%;animation-delay:0.00s"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0 C13 8 16 11 24 12 C16 13 13 16 12 24 C11 16 8 13 0 12 C8 11 11 8 12 0 Z"/></svg></span>
@@ -119,7 +129,7 @@ header p.date { font-family: var(--display); font-size: 18px; letter-spacing: 0.
       </div>
     </figure>
     <figure class="page after">
-      <a href="p04.jpg" target="_blank" rel="noopener" class="zoom" aria-label="Ver la hoja en tamaño completo"><img src="p04.jpg" loading="lazy" alt="Página 04, Brilla en plateado: accesorios de Isadora, aros, collares, brazaletes y anillos."></a>
+      <button type="button" class="zoom" data-src="p04.jpg" aria-label="Ampliar la hoja"><img src="p04.jpg" loading="lazy" alt="Página 04, Brilla en plateado: accesorios de Isadora, aros, collares, brazaletes y anillos."></button>
       <div class="fx" aria-hidden="true">
       <span class="shine" style="left:31%;top:5%;width:38%;height:11%"></span>
       <span class="spark" style="left:10%;top:31%;width:1.4%;animation-delay:0.00s"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0 C13 8 16 11 24 12 C16 13 13 16 12 24 C11 16 8 13 0 12 C8 11 11 8 12 0 Z"/></svg></span>
@@ -144,6 +154,14 @@ header p.date { font-family: var(--display); font-size: 18px; letter-spacing: 0.
     <button id="next" class="txt" type="button" aria-label="Página siguiente">SIGUIENTE →</button>
   </div>
   <p class="hint">GIRA TU CELULAR PARA VERLA MÁS GRANDE</p>
+</div>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Hoja en tamaño completo">
+  <div class="lb-bar">
+    <p id="lbHint">TOCA LA IMAGEN PARA ACERCAR</p>
+    <button type="button" id="lbClose" aria-label="Cerrar">CERRAR ✕</button>
+  </div>
+  <div class="lb-view" id="lbView"><img id="lbImg" alt=""></div>
 </div>
 
 <script>
@@ -180,8 +198,46 @@ header p.date { font-family: var(--display); font-size: 18px; letter-spacing: 0.
     if (Math.abs(dx) > 40) go(dx < 0 ? cur + 1 : cur - 1);
   });
   document.addEventListener('keydown', function (e) {
+    if (!document.getElementById('lb').hidden) return;
     if (e.key === 'ArrowRight') go(cur + 1);
     if (e.key === 'ArrowLeft') go(cur - 1);
+  });
+})();
+
+(function () {
+  var lb = document.getElementById('lb'), view = document.getElementById('lbView'), img = document.getElementById('lbImg');
+  var hint = document.getElementById('lbHint'), closeBtn = document.getElementById('lbClose'), opener = null;
+  function setZoom(on, cx, cy) {
+    var r = view.getBoundingClientRect();
+    var fx = cx == null ? 0.5 : (cx - r.left + view.scrollLeft) / img.offsetWidth;
+    var fy = cy == null ? 0.5 : (cy - r.top + view.scrollTop) / img.offsetHeight;
+    view.classList.toggle('on', on);
+    hint.textContent = on ? 'ARRASTRA PARA MOVERTE · TOCA PARA ALEJAR' : 'TOCA LA IMAGEN PARA ACERCAR';
+    requestAnimationFrame(function () {
+      view.scrollLeft = fx * img.offsetWidth - view.clientWidth / 2;
+      view.scrollTop = fy * img.offsetHeight - view.clientHeight / 2;
+    });
+  }
+  document.querySelectorAll('.zoom').forEach(function (b) {
+    b.addEventListener('click', function () {
+      opener = b; img.src = b.dataset.src; img.alt = b.querySelector('img').alt;
+      setZoom(false); lb.hidden = false; document.body.style.overflow = 'hidden'; closeBtn.focus();
+    });
+  });
+  function close() { lb.hidden = true; document.body.style.overflow = ''; view.classList.remove('on'); if (opener) opener.focus(); }
+  closeBtn.addEventListener('click', close);
+  document.addEventListener('keydown', function (e) { if (!lb.hidden && e.key === 'Escape') close(); }, true);
+  var down = null, moved = false;
+  view.addEventListener('pointerdown', function (e) { down = { x: e.clientX, y: e.clientY, sl: view.scrollLeft, st: view.scrollTop }; moved = false; });
+  view.addEventListener('pointermove', function (e) {
+    if (!down || e.pointerType === 'touch') return;
+    var dx = e.clientX - down.x, dy = e.clientY - down.y;
+    if (Math.abs(dx) + Math.abs(dy) > 5) { moved = true; if (view.classList.contains('on')) { view.classList.add('drag'); view.scrollLeft = down.sl - dx; view.scrollTop = down.st - dy; } }
+  });
+  view.addEventListener('pointerup', function (e) {
+    view.classList.remove('drag');
+    if (down && !moved && Math.abs(e.clientX - down.x) + Math.abs(e.clientY - down.y) < 8) setZoom(!view.classList.contains('on'), e.clientX, e.clientY);
+    down = null;
   });
 })();
 </script>
